@@ -17,6 +17,8 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { fetchMoviesStart, fetchMoviesSuccess } from "./store/slices/moviesSlice";
 import moviesData from "./components/MoviesData";
+import ExplorePage from "./components/ExlorePage.jsx";
+
 function App() {
   const dispatch = useDispatch();
 
@@ -41,6 +43,7 @@ function App() {
           <Route path="/payment-success" element={<PaymentSuccess />} />
           <Route path="/admin-bookings" element={<AdminBookings />} />
           <Route path="/admin-movie-view/:movieId" element={<AdminMovieView />} />
+          <Route path="explore-page" element={<ExplorePage/>} />
         </Routes></div>
     </BrowserRouter>
   );

@@ -14,7 +14,6 @@ function BookingPage() {
     const navigate = useNavigate();
     const location = useLocation();
 
-    // ******** FIX: Type the location state ********
     const state = location.state as { movie: any } | null;
 
     const [bookedSeats, setBookedSeats] = useState<string[]>([]);
@@ -22,7 +21,6 @@ function BookingPage() {
 
     const dispatch = useDispatch();
 
-    // ******** FIX: Type useSelector ********
     const { selectedMovie, selectedSeats, selectedShowTime } = useSelector(
         (state: RootState) => state.booking
     );
@@ -45,7 +43,6 @@ function BookingPage() {
         "C1", "C2", "C3", "C4", "C5",
     ];
 
-    // ******** Runs first time only ********
     useEffect(() => {
         dispatch(setSelectedMovie(movie));
         dispatch(setSelectedShowTime(showTime));

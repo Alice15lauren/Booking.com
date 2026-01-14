@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { increment, decrement, reset } from "../store/slices/counterSlice";
 import { logout } from "../store/slices/authSlice";
 
+
 function UserHome() {
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef(null);
@@ -129,7 +130,8 @@ function UserHome() {
           <p className="text-lg mb-6">
             Discover movies, concerts, sports, and live shows near you
           </p>
-          <button className="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100">Explore Now</button>
+          <button className="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100"
+          onClick={()=>navigate("/explore-page")}>Explore Now</button>
         </div>
 
         <h2 className="text-2xl font-semibold mb-6">
