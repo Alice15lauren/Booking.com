@@ -1,13 +1,17 @@
 /* eslint-disable no-unused-vars */
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { apiRequest } from "../api/api";
+import { logout } from "../store/slices/authSlice";
+import { useDispatch } from "react-redux";
+
 
 function AdminHome() {
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  // Hardcoded upcoming movies
   const upcomingMovies = [
     {
       id: 1,
@@ -15,7 +19,7 @@ function AdminHome() {
       showDate: "2026-01-10",
       showTime: "18:30",
       venue: "PVR Cinemas, Mumbai",
-      poster: "https://via.placeholder.com/400x250?text=Avengers",
+      poster: "https://placehold.co/400x250?text=Avatar+3",
       status: "Scheduled",
     },
     {
@@ -24,7 +28,7 @@ function AdminHome() {
       showDate: "2026-01-12",
       showTime: "20:00",
       venue: "INOX, Delhi",
-      poster: "https://via.placeholder.com/400x250?text=The+Flash",
+      poster: "https://placehold.co/400x250?text=Avatar+3",
       status: "Scheduled",
     },
     {
@@ -33,7 +37,7 @@ function AdminHome() {
       showDate: "2026-01-15",
       showTime: "19:00",
       venue: "PVR Cinemas, Bangalore",
-      poster: "https://via.placeholder.com/400x250?text=Avatar+3",
+      poster: "https://placehold.co/400x250?text=Avatar+3",
       status: "Scheduled",
     },
     {
@@ -42,7 +46,7 @@ function AdminHome() {
       showDate: "2026-01-18",
       showTime: "21:00",
       venue: "INOX, Pune",
-      poster: "https://via.placeholder.com/400x250?text=Mission+Impossible+8",
+      poster: "https://placehold.co/400x250?text=Avatar+3",
       status: "Scheduled",
     },
   ];
@@ -60,12 +64,13 @@ function AdminHome() {
 
   async function handleLogout() {
     try {
-      // optional API call
+      await apiRequest("/auth/logout", "POST");
     } catch (e) {
-      // Error Message
+      // optional log
     } finally {
       localStorage.clear();
-      navigate("/");
+      dispatch(logout());
+      navigate("/", { replace: true });
     }
   }
 
@@ -165,7 +170,7 @@ function AdminHome() {
 
                 <div className="mt-3 flex justify-end">
                   <button className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors text-sm"
-                     onClick={()=>navigate(`/admin-movie-view/${movie.id}`)}>
+                    onClick={() => navigate(`/admin-movie-view/${movie.id}`)}>
                     View
                   </button>
                 </div>
